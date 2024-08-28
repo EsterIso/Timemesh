@@ -1,19 +1,3 @@
-"""
-File: settings.py
-Author: Ester
-Documentation updated by: Jason
-Date: 2024-08-09
-
-This file contains configuration settings for the Django project, including
-database setup, middleware, installed apps, authentication backends, and
-other project-specific settings.
-    
-Note:
-    - Remember to set up environment variables for sensitive information.
-    - The default profile picture path and other static/media settings can
-      be adjusted according to your project's needs.
-"""
-
 import os
 from pathlib import Path
 from datetime import timedelta
@@ -22,22 +6,18 @@ import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-6lil76#p&uweo_li$2ms_e2&t-bj0-y8v(uxol-!2+=4=4^q#q')
-
-SECURE_SSL_REDIRECT = True
-
-CORS_ALLOW_CREDENTIALS = True
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
+SECURE_SSL_REDIRECT = not DEBUG  # Redirects to HTTPS in production
+
+CORS_ALLOW_CREDENTIALS = True
+
 # Security settings
 if not DEBUG:
-    SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
     SECURE_BROWSER_XSS_FILTER = True
@@ -49,7 +29,6 @@ if not DEBUG:
 ALLOWED_HOSTS = ['timemesh-rr1s.onrender.com', 'localhost', '127.0.0.1']
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -90,8 +69,8 @@ ROOT_URLCONF = 'calendar_app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Path to your project-level templates directory
+        'APP_DIRS': True,  # Automatically discover templates in app directories
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -106,15 +85,11 @@ TEMPLATES = [
 WSGI_APPLICATION = 'calendar_app.wsgi.application'
 
 # Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
 DATABASES = {
     'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
 }
 
 # Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -131,24 +106,15 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Internationalization
-# https://docs.djangoproject.com/en/5.0/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
-
 STATIC_URL = 'static/'
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SITE_ID = 1
@@ -166,6 +132,11 @@ SOCIALACCOUNT_PROVIDERS = {
         ],
         'AUTH_PARAMS': {
             'access_type': 'online',
+        },
+        'APP': {
+            'client_id': os.getenv('VITE_GOOGLE_OAUTH_ID'),
+            'secret': os.getenv('VITE_GOOGLE_OAUTH_SECRET'),
+            'key': ''
         }
     }
 }
@@ -189,13 +160,6 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
-# Add your Google OAuth client ID and secret
-SOCIALACCOUNT_PROVIDERS['google']['APP'] = {
-    'client_id': os.getenv('VITE_GOOGLE_OAUTH_ID'),
-    'secret': os.getenv('VITE_GOOGLE_OAUTH_SECRET'),
-    'key': ''
-}
-
 AUTH_USER_MODEL = 'users.CustomUser'
 
 # dj-rest-auth settings
@@ -211,9 +175,6 @@ ACCOUNT_UNIQUE_EMAIL = True
 # CORS settings
 CORS_ALLOW_ALL_ORIGINS = False  
 CSRF_TRUSTED_ORIGINS = ['https://timemesh-rr1s.onrender.com']
-
-# Base dir of your project
-BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Media files (uploads)
 MEDIA_URL = '/media/'
@@ -231,22 +192,6 @@ EMAIL_USE_SSL = False  # Use SSL (True if EMAIL_USE_TLS is False)
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')  # Your email address
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD') # Your email account password
 DEFAULT_FROM_EMAIL = 'TimeMesh <'+EMAIL_HOST_USER+'>'  # Default from email address
-
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Path to your project-level templates directory
-        'APP_DIRS': True,  # Automatically discover templates in app directories
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]
 
 LOGGING = {
     'version': 1,
