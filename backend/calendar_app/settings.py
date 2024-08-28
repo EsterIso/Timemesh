@@ -28,6 +28,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-6lil76#p&uweo_li$2ms_e2&t-bj0-y8v(uxol-!2+=4=4^q#q')
 
+SECURE_SSL_REDIRECT = True
+
+CORS_ALLOW_CREDENTIALS = True
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
