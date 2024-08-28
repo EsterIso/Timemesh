@@ -1,11 +1,10 @@
-from django.contrib.auth import get_user_model
+from django.apps import apps
 from django.http import HttpResponse
 from django.core.management import call_command
 
-User = get_user_model()  # This retrieves the custom user model
-
 def run_migrations(request):
     try:
+        call_command('makemigrations')  # This line was corrected
         call_command('migrate')
         return HttpResponse("Migrations completed successfully.")
     except Exception as e:
@@ -13,16 +12,17 @@ def run_migrations(request):
 
 def create_superuser(request):
     try:
-        username = 'Ester'  # Set your desired username
+        CustomUser = apps.get_model('users', 'CustomUser')
         email = 'esterlinjpaulinp@gmail.com'  # Set your desired email
+        username = 'Ester'  # Set your desired username
         password = 'admin-app123'  # Set your desired password
 
         # Check if the user already exists
-        if User.objects.filter(email=email).exists():
+        if CustomUser.objects.filter(email=email).exists():
             return HttpResponse("Superuser already exists.")
 
         # Create the superuser
-        User.objects.create_superuser(email=email, username=username, password=password)
+        CustomUser.objects.create_superuser(email=email, username=username, password=password)
         
         return HttpResponse("Superuser created successfully.")
     except Exception as e:
