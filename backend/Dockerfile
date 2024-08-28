@@ -1,5 +1,4 @@
-# backend/Dockerfile
-
+# Use the official Python image from the Docker Hub
 FROM --platform=linux/amd64 python:3.10-slim
 
 # Set the working directory
@@ -19,5 +18,5 @@ EXPOSE 8000
 # Set Python path
 ENV PYTHONPATH=/app:$PYTHONPATH
 
-# Start the Django server
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Start Waitress server
+CMD ["waitress-serve", "--host=0.0.0.0", "--port=8000", "your_project_name.wsgi:application"]
