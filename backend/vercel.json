@@ -22,11 +22,16 @@
             "dest": "/static/$1"
         },
         {
+            "src": "/admin/static/(.*)",
+            "dest": "/static/admin/$1"
+        },
+        {
             "src": "/(.*)",
             "dest": "calendar_app/wsgi.py"
         }
     ],
     "env": {
-        "PYTHONPATH": ".:$PYTHONPATH"
+        "PYTHONPATH": ".:$PYTHONPATH",
+        "DJANGO_SETTINGS_MODULE": "calendar_app.settings"
     }
 }
