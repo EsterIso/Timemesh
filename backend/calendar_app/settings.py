@@ -31,12 +31,12 @@ SECRET_KEY = 'django-insecure-6lil76#p&uweo_li$2ms_e2&t-bj0-y8v(uxol-!2+=4=4^q#q
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['.vercel.app', '.vercel.app/admin' 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['.vercel.app', '.vercel.app/admin', 'localhost', '127.0.0.1']
 
 # Application definition
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://timemesh-rr1s.onrender.com", "https://*.vercel.app", '"https://*.vercel.app/admin',
+    "https://timemesh-rr1s.onrender.com", "https://*.vercel.app", "https://*.vercel.app/admin",
 ]
 
 INSTALLED_APPS = [
