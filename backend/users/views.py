@@ -123,5 +123,5 @@ def sign_out(request):
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
-def test_connection():
+def test_connection(request):
     return Response({'message': 'Connection successful'}, status=status.HTTP_200_OK)
