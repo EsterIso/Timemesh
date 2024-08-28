@@ -1,5 +1,7 @@
+from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.core.management import call_command
+from django.contrib.auth.management import create_superuser
 
 def run_migrations(request):
     try:
@@ -14,12 +16,12 @@ def create_superuser(request):
         email = 'esterlinjpaulinp@gmail.com'  # Set your desired email
         password = 'admin-app123'  # Set your desired password
 
-        # Using Django’s built-in create_superuser method to avoid interactive prompts
-        call_command('createsuperuser', 
-                     interactive=False, 
-                     username=username, 
-                     email=email, 
-                     password=password)
+        # Check if the user already exists
+        if User.objects.filter(username=username).exists():
+            return HttpResponse("Superuser already exists.")
+
+        # Create the superuser
+        User.objects.create_superuser(username=username, email=email, password=password)
         
         return HttpResponse("Superuser created successfully.")
     except Exception as e:
