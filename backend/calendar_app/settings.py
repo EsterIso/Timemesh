@@ -205,7 +205,8 @@ REST_AUTH = {
 ACCOUNT_UNIQUE_EMAIL = True
 
 # CORS settings
-CORS_ALLOW_ALL_ORIGINS = ["https://timemesh-rr1s.onrender.com",]  
+CORS_ALLOW_ALL_ORIGINS = False  
+CSRF_TRUSTED_ORIGINS = ['https://timemesh-rr1s.onrender.com']
 
 # Base dir of your project
 BASE_DIR = Path(__file__).resolve().parent.parent
