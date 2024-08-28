@@ -3,7 +3,10 @@
         {
             "src": "calendar_app/wsgi.py",
             "use": "@vercel/python",
-            "config": { "maxLambdaSize": "15mb", "runtime": "python3.12" }
+            "config": { 
+                "maxLambdaSize": "15mb", 
+                "runtime": "python3.12"
+            }
         },
         {
             "src": "build_files.sh",
@@ -22,5 +25,8 @@
             "src": "/(.*)",
             "dest": "calendar_app/wsgi.py"
         }
-    ]
+    ],
+    "env": {
+        "PYTHONPATH": ".:$PYTHONPATH"
+    }
 }
