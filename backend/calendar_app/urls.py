@@ -32,7 +32,7 @@ from invitations.views import create_invitation, respond_invitation, get_invites
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', RedirectView.as_view(url='/api/', permanent=False), name='index'),
+    path('', RedirectView.as_view(url='/admin/', permanent=False), name='index'),
 
     ## Authorization Paths
     path('api/auth/', include('dj_rest_auth.urls')),
