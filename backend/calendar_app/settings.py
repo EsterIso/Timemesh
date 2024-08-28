@@ -203,7 +203,7 @@ REST_AUTH = {
 ACCOUNT_UNIQUE_EMAIL = True
 
 # CORS settings
-CORS_ALLOW_ALL_ORIGINS = False  # For development only. Use specific origins in production.
+CORS_ALLOW_ALL_ORIGINS = True  # For development only. Use specific origins in production.
 
 CORS_ALLOW_CREDENTIALS = True
 
