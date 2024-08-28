@@ -24,7 +24,6 @@ from django.urls import path, include
 from users.views import google_auth, sign_out
 from django.conf import settings
 from django.conf.urls.static import static
-from django.views.generic import RedirectView
 
 from calendars.views import calendar_view, calendar_detailed_view, get_shared_calendars
 from events.views import event_view, event_detailed_view
@@ -32,7 +31,6 @@ from invitations.views import create_invitation, respond_invitation, get_invites
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', RedirectView.as_view(url='/api/', permanent=False), name='index'),
 
     ## Authorization Paths
     path('api/auth/', include('dj_rest_auth.urls')),
