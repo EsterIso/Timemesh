@@ -31,9 +31,13 @@ SECRET_KEY = 'django-insecure-6lil76#p&uweo_li$2ms_e2&t-bj0-y8v(uxol-!2+=4=4^q#q
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['timemesh-rr1s.onrender.com', 'localhost', '127.0.0.1']
 
 # Application definition
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://timemesh-rr1s.onrender.com",
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -194,7 +198,7 @@ REST_AUTH = {
 ACCOUNT_UNIQUE_EMAIL = True
 
 # CORS settings
-CORS_ALLOW_ALL_ORIGINS = True  # For development only. Use specific origins in production.
+CORS_ALLOW_ALL_ORIGINS = False  # For development only. Use specific origins in production.
 
 # Base dir of your project
 BASE_DIR = Path(__file__).resolve().parent.parent
