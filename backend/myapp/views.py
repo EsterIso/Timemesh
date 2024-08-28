@@ -13,9 +13,9 @@ def run_migrations(request):
 
 def create_superuser(request):
     User = get_user_model()
-    email = 'esterlinjpaulino@gmail.com'  # Set your desired email
-    username = 'Ester'  # Set your desired username
-    password = 'admin-app123'  # Set your desired password
+    email = 'timemeshapp@gmail.com'  # Set your desired email
+    username = 'TimeMesh'  # Set your desired username
+    password = 'zf304W5M9y`5'  # Set your desired password
 
     try:
         # Delete existing user with the same username or email
