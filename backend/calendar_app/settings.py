@@ -29,14 +29,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-6lil76#p&uweo_li$2ms_e2&t-bj0-y8v(uxol-!2+=4=4^q#q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['.vercel.app', '.vercel.app/admin' 'localhost', '127.0.0.1']
 
 # Application definition
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://timemesh-rr1s.onrender.com", ".vercel.app", '.vercel.app/admin',
+    "https://timemesh-rr1s.onrender.com", "https://*.vercel.app", '"https://*.vercel.app/admin',
 ]
 
 INSTALLED_APPS = [
@@ -60,10 +60,12 @@ INSTALLED_APPS = [
     'calendars.apps.CalendarConfig',
     'events.apps.EventsConfig',
     'invitations.apps.InvitationsConfig',
+    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -133,7 +135,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -202,6 +207,9 @@ CORS_ALLOW_ALL_ORIGINS = False  # For development only. Use specific origins in 
 
 CORS_ALLOW_CREDENTIALS = True
 
+CORS_ALLOWED_ORIGINS = [
+    "https://timemesh-rr1s.onrender.com", "https://*.vercel.app", '"https://*.vercel.app/admin',
+]
 # Base dir of your project
 BASE_DIR = Path(__file__).resolve().parent.parent
 
