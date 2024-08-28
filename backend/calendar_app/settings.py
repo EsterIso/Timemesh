@@ -36,7 +36,7 @@ ALLOWED_HOSTS = ['.vercel.app', '.vercel.app/admin' 'localhost', '127.0.0.1']
 # Application definition
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://timemesh-rr1s.onrender.com",
+    "https://timemesh-rr1s.onrender.com", ".vercel.app", '.vercel.app/admin',
 ]
 
 INSTALLED_APPS = [
