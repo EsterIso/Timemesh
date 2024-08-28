@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.core.management import call_command
-from django.contrib.auth.management import create_superuser
+
 
 def run_migrations(request):
     try:
