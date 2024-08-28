@@ -21,7 +21,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from users.views import google_auth, sign_out
+from users.views import google_auth, sign_out, test_connection
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -54,6 +54,7 @@ urlpatterns = [
     path('api/invitations/', get_invites_by_email, name='get_invites_by_email'),
 
     path('myapp/', include('myapp.urls')),
+    path('api/test', test_connection, name="test_connection")
 ]
 
 # Serve media files in development
