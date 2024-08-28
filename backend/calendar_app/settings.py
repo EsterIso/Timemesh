@@ -200,6 +200,8 @@ ACCOUNT_UNIQUE_EMAIL = True
 # CORS settings
 CORS_ALLOW_ALL_ORIGINS = False  # For development only. Use specific origins in production.
 
+CORS_ALLOW_CREDENTIALS = True
+
 # Base dir of your project
 BASE_DIR = Path(__file__).resolve().parent.parent
 
